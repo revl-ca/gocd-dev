@@ -1,0 +1,3 @@
+cirriops-pipelines-exp git@github.com:revl-ca/cirriops-pipelines-exp.git master
+cirriops-pipelines-exp-docker git@github.com:revl-ca/cirriops-pipelines-exp-docker.git master
+

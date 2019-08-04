@@ -1,0 +1,54 @@
+version: '2'
+
+volumes:
+  gocd-data:
+  gocd-user:
+  registry-data:
+
+networks:
+  gocd-network:
+
+services:
+  gocd-server:
+    image: gocd/gocd-server:${GOCD_VERSION}
+    ports:
+    - 8153:8153
+    - 8154:8154
+    networks:
+    - gocd-network
+    depends_on:
+    - docker
+    volumes:
+    - gocd-data:/godata
+    - gocd-user:/home/go
+    - ./scripts:/scripts:ro
+    environment:
+      DOCKER_GO_HOSTNAME: gocd-server
+      DOCKER_DIND_HOSTNAME: docker
+      GOCD_VERSION: ${GOCD_VERSION}
+      CLUSTER_PROFILE_ID: ${CLUSTER_PROFILE_ID}
+      GOCD_PLUGIN_INSTALL_docker-elastic-agents-plugin: https://github.com/gocd-contrib/docker-elastic-agents-plugin/releases/download/v3.0.0-222/docker-elastic-agents-3.0.0-222.jar
+      GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/0.10.2/yaml-config-plugin-0.10.2.jar
+
+  docker:
+    privileged: true
+    image: docker:dind
+    command: ["--insecure-registry=registry:5000"]
+    networks:
+    - gocd-network
+    volumes:
+    - ~/.ssh:/home/go/.ssh:ro
+    environment:
+      DOCKER_TLS_CERTDIR: ''
+
+  registry:
+    image: registry:2
+    ports:
+    - 5000:5000
+    networks:
+    - gocd-network
+    volumes:
+    - registry-data:/data
+    environment:
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+

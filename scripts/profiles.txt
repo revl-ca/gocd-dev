@@ -1,0 +1,4 @@
+gocd-agent-ubuntu gocd/gocd-agent-ubuntu-18.04 false
+gocd-agent-alpine gocd/gocd-agent-alpine-3.9 false
+gocd-agent-dind gocd/gocd-agent-docker-dind true
+gocd-agent-ubuntu-ansible registry:5000/gocd-agent-ubuntu-ansible false
