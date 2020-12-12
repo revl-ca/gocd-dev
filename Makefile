@@ -12,6 +12,9 @@ logs:
 git:
 	docker-compose exec gocd-server ./scripts/git.sh $(SCM)
 
+secure:
+	docker-compose exec gocd-server ./scripts/secure.sh $(GOCD_USERNAME) $(GOCD_PASSWORD)
+
 profiles:
 	docker-compose exec gocd-server ./scripts/profiles.sh
 

@@ -24,6 +24,12 @@
 
 ## Misc.
 
+### Secure the Login
+
+`GOCD_USERNAME=<username> GOCD_PASSWORD=<password> make secure`
+
+**ENABLING THIS MAKE YOU UNABLE TO PROVISION WITH SCRIPTS**
+
 ### Stop GoCD
 
 `make stop`
