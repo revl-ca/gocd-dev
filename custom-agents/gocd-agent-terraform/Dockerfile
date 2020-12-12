@@ -1,6 +1,8 @@
 ARG GOCD_VERSION
 FROM gocd/gocd-agent-ubuntu-18.04:$GOCD_VERSION AS base
 
+ENV DEBIAN_FRONTEND noninteractive
+
 USER root
 
 # CLI: Chef InSpec
@@ -20,7 +22,7 @@ RUN wget -qO- https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terr
     unzip -d /bin terraform.zip
 
 # FINAL
-FROM BASE
+FROM base
 
 COPY --from=terraform /bin/terraform /bin
 

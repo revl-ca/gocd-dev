@@ -20,7 +20,7 @@ RUN wget -qO- https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${P
     unzip -d /bin packer.zip
 
 # FINAL
-FROM BASE
+FROM base
 
 COPY --from=packer /bin/packer /bin
 
