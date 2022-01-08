@@ -13,7 +13,7 @@ parse_property() {
   local PROPERTY="$1"
   local JSONPATH="$2"
 
-  python -c "import json, sys; print json.load(sys.stdin)$JSONPATH[sys.argv[1]];" "$PROPERTY"
+  python3 scripts/parse.py "$PROPERTY" "$JSONPATH"
 }
 
 wait_server_ready() {
